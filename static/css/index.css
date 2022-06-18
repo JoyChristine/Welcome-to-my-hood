@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Pacifico&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body,
+input {
+    font-family: "Poppins", sans-serif;
+}
+
+#main{
+    position: relative;
+    width: 100%;
+   
+    background-color: #5A445F;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.navbar{
+    background-color: #5A445F;
+    padding:2vw 2vw 2vw 2vw;
+}
+.navbar .navbar-brand{
+    color:#fff;
+}
+#navbarNav ul li a {
+    color:#fff;
+}
+.navbar input[type=text] {
+    float: right;
+    color: #fff;
+    background-color:#5A445F;
+    padding: 1vw 1vw 1vw 1vw;
+    border: 1px white solid;
+    border-radius: 2vw;
+    /* margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px; */
+  }
+#searchform input::placeholder{
+    color: white;
+}
+/* body */
+#welcome{
+    color:#fff;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 600;
+    padding: 2vw;
+}
+#p{
+    color:#fff;
+    font-family: 'Cabin', sans-serif;
+    padding-left: 2vw;
+}
