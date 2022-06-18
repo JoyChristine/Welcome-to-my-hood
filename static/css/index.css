@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: pointer;
 
 }
 body,
@@ -43,6 +44,27 @@ input {
 #searchform input::placeholder{
     color: white;
 }
+#user{
+    /* margin-top:10%; */
+    padding-top:3%;
+    margin-left:2%;
+}
+#user .text{
+    color: white;
+    text-decoration: none;
+    
+}
+#user p:hover{
+
+}
+
+
+
+
+
+
+
+
 /* body */
 #welcome{
     color:#fff;
