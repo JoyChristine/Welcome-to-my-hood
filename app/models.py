@@ -3,9 +3,37 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from cloudinary.models import CloudinaryField
+from django.db.models.deletion import CASCADE, SET_NULL
 from django.http import Http404
 from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
+    profile_pic = CloudinaryField('image',default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
+    bio = models.CharField(max_length=50)
+    email =models.EmailField(max_length=20)
+    location = models.CharField(max_length=20,null=True, blank=True)
+    neighbourhood = models.ForeignKey('NeighbourHood', on_delete=SET_NULL,null=True, related_name='pple', blank=True)
+    # user = models.OneToOneField(User,on_delete=models.CASCADE)
+    # bio = models.CharField(max_length=50)
+    # profile_pic = CloudinaryField('image',default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
+    # neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE,blank=True)
+    # email= models.EmailField(max_length=20)
+    # location= models.CharField(max_length=20,blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    @receiver(post_save,sender=User)
+    def create_user_profile(sender,instance,created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    # @receiver(post_save,sender=User)
+    # def save_user_profile(sender,instance,**kwargs):
+    #         instance.profile.save()
+
+
 class Neighbourhood(models.Model):
     image = CloudinaryField('image',blank=True, default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
     name = models.CharField(max_length=20)
@@ -38,32 +66,6 @@ class Neighbourhood(models.Model):
     def find_neighbourhood(cls,neighbourhood_id):
         return cls.objects.filter(id=neighbourhood_id)
 
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
-    profile_pic = CloudinaryField('image',default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
-    bio = models.CharField(max_length=50)
-    email =models.EmailField(max_length=20)
-    location = models.CharField(max_length=20,null=True, blank=True)
-    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE,blank=True)
-    # user = models.OneToOneField(User,on_delete=models.CASCADE)
-    # bio = models.CharField(max_length=50)
-    # profile_pic = CloudinaryField('image',default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
-    # neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE,blank=True)
-    # email= models.EmailField(max_length=20)
-    # location= models.CharField(max_length=20,blank=True)
-
-    def __str__(self):
-        return self.name
-
-    @receiver(post_save,sender=User)
-    def create_user_profile(sender,instance,created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    # @receiver(post_save,sender=User)
-    # def save_user_profile(sender,instance,**kwargs):
-    #         instance.profile.save()
 
 
     
