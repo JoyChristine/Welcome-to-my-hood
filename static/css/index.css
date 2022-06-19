@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -15,18 +18,26 @@ input {
 #main{
     position: relative;
     width: 100%;
-   
+    padding-top:3vw;
     background-color: #5A445F;
-    max-height: 80vh;
+    max-height: 100vh;
     overflow: hidden;
 }
 
 .navbar{
     background-color: #5A445F;
-    padding:2vw 2vw 2vw 2vw;
+    padding:2vw 2vw 1vw 2vw;
 }
 .navbar .navbar-brand{
-    color:#fff;
+    color:rgb(255, 255, 255);
+    text-decoration: none;
+    font-family: 'Bad Script', cursive;
+    font-weight: 600;
+    font-size:3vw;
+}
+.navbar .navbar-brand:hover{
+    color:rgb(255, 255, 255);
+    text-decoration: none;
 }
 #navbarNav ul li a {
     color:#fff;
@@ -53,18 +64,31 @@ input {
 #user .text{
     color: white;
     text-decoration: none;
+    font-family: 'Joan', serif;
     
 }
-
+#body-img{
+    margin-left:10%;
+    width:30vw;
+    height:30vw;
+    border-radius: 40vw;
+    margin-bottom: 2%;
+   
+}
 /* MYprofile */
 #container-profile{
     position: relative;
     width: 100%;
     font-family: 'Cabin', sans-serif;
-    font-size:1.5vw;
+    font-size:1.3vw;
+    line-height: 2vw;
     background-color: #5A445F;
     min-height: 100vh;
     overflow: hidden;
+}
+#container-profile img{
+    width:25vw;
+    height:40vh;
 }
 #edit-profile{
     background-color: #FFC265;
@@ -72,7 +96,21 @@ input {
     padding:1vw 1vw 1vw 1vw;
     border:none;
 }
-
+#userform{
+    font-size:1.4vw;
+}
+#modal-content{
+    width:50vw;
+    height:25vw;
+    line-height:2vw;
+}
+#updateprofile{
+    background-color: #5A445F;
+    color:rgb(255, 255, 255);
+    padding:1vw 1vw 1vw 1vw;
+    border:none;
+    font-size: 1vw;
+}
 /* END OF MYPROFILE */
 
 
@@ -91,6 +129,10 @@ input {
     padding-left: 2vw;
 }
 /* hood */
+#hood h2{
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
 #create a{
     text-decoration: none;
     color:#5A445F
@@ -101,36 +143,64 @@ input {
 #hoodcard{
     backdrop-filter: blur(15px);
     background: rgba(255,255,255, 0.2);
-    /* box-shadow: 0 35px 68px 0 rgba(170,63,254,0.1), inset 0 -8px 16px 0  #D6A2FF; */
-    padding: 1vw; 
-    margin-left: 1%;
-
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.1), inset 0 -2px 4px 0  #000000;
+    /* height: 40vw; */
+    
     border-radius: 30px;
     background: #ffffff;
     text-align: center;
 }
 #hoodcard img{
-    width: 15vw;
-    height: 15vw;
+    width: 23vw;
+    height: 23vw;
+    
+}
+#hoodcard .card-body {
+    padding: .1vw .001vw -0.1vw .1vw;
 }
 #hoodjoin{
     background-color: #5A445F;
     color:rgb(255, 255, 255);
     padding:1vw 1vw 1vw 1vw;
     border:none;
+    font-size: 1vw;
 }
 #hoodview{
     background-color: #5A445F;
     color:rgb(255, 255, 255);
-    padding:1vw 1vw 1vw 1vw;
+    padding:0.3vw .3vw .4vw .5vw;
     border:none;
+    font-size: 1vw;
 }
 #hoodleave{
     background-color: #FFC265;
     color:rgb(0, 0, 0);
-    padding:1vw 1vw 1vw 1vw;
+    padding:0.3vw .3vw .4vw .5vw;
     border:none;
+    font-size: 1vw;
 }
+#hood-dets{
+    padding:0;
+}
+#hood-dets img{
+    width:23vw;
+    height:20vw;
+}
+#hood-contain{
+    background-color: #5A445F;
+    
+    color: #fff;
+    /* border-top: 1px solid white; */
+}
+#postcard,#buscard{
+    background-color: #5A445F;
+    border:1px solid grey;
+    color: #fff;
+}
+#postcard img,#buscard img{
+    width: 100%;
+}
+
 /* ***************END HOOD */
 
 /* add neighbourhood */
@@ -147,8 +217,8 @@ input {
 
 /* ******add post => hood.html */
 #addpost,#addbusiness {
-    background-color: #5A445F;
-    color:rgb(255, 255, 255);
+    background-color: #EEA5AE;
+    color:rgb(0, 0, 0);
     padding:1vw 1vw 1vw 1vw;
     border:none;
     border-radius:2vw;
