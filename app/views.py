@@ -6,7 +6,7 @@ from .forms import SignupForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Profile,Business,Neighbourhood,Post
-from .forms import UpdateUserForm, AddBusinessForm,CreateNeighbourhoodForm
+from .forms import UpdateUserForm, AddBusinessForm,CreateNeighbourhoodForm,CreatePostForm,AddBusinessForm
 from django.contrib.auth import authenticate,login,logout
 #  Create your views here.
 def register(request):
@@ -122,14 +122,68 @@ def leave_neighbourhood(request,neighbourhood_id):
 
     return redirect('index')
 
+# def newpost(request, neighbourhood_id):
+#     neighbourhood = Neighbourhood.objects.get(id=neighbourhood_id)
+#     if request.method == 'POST':
+#         add_post_form = CreatePostForm(request.POST,request.FILES)
+#         if add_post_form.is_valid():
+#             post = add_post_form.save(commit=False)
+#             post.neighbourhood = neighbourhood
+#             post.user = request.user
+#             post.save()
+#             return redirect('hood', neighbourhood.id)
+#     else:
+#         add_post_form = CreatePostForm()
+#     return render(request, 'all/post.html', {'add_post_form': add_post_form,'neighbourhood':neighbourhood})
+
+def newpost(request,neighbourhood_id):
+    neighbourhood = Neighbourhood.objects.get(id=neighbourhood_id)
+    posts = Post.objects.all()
+    if request.method == 'POST':
+        newpostform = CreatePostForm(request.POST,request.FILES)
+        if newpostform.is_valid():
+            # commit=false => get model object(post), then add your extra data and save it.
+            newpost = newpostform.save(commit=False)
+            # newpost is in that neighbourhood
+            newpost.neighbourhood = neighbourhood
+            newpost.user = request.user
+            newpost.save()
+            return redirect('hood',neighbourhood_id)
+    else:
+        newpostform = CreatePostForm()
+    context= {
+        'newpostform': newpostform,
+        'posts ':posts,
+        'neighbourhood':neighbourhood,
+
+        
+    }
+    return render(request, 'all/post.html', context)
 
 
+def newbusiness(request,neighbourhood_id):
+    neighbourhood = Neighbourhood.objects.get(id=neighbourhood_id)
+    business = Business.objects.all()
+    if request.method == 'POST':
+        businessform = AddBusinessForm(request.POST,request.FILES)
+        if businessform.is_valid():
+            # commit=false => get model object(post), then add your extra data and save it.
+            new_business = businessform.save(commit=False)
+            # newpost is in that neighbourhood
+            new_business.neighbourhood = neighbourhood
+            new_business.user = request.user
+            new_business.save()
+            return redirect('hood',neighbourhood_id)
+    else:
+        businessform = AddBusinessForm()
+    context= {
+        'businessform': businessform,
+        'business':business,
+        'neighbourhood':neighbourhood,
 
-
-
-
-
-
+        
+    }
+    return render(request, 'all/business.html', context)
 
     # create,update,delete,update neighbourhood
     # get neighbourhood user
