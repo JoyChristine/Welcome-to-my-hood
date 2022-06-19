@@ -1,39 +1,7 @@
 {%extends 'all/base.html'%}
 {%load static%}
 {%block content %}
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{%url 'index'%}">Neighbourhood Watch </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav"  >
-        <ul class="navbar-nav" style="margin-left:30%;">
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'index'%}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-
-        </ul>
-        <div class="search-container" style="margin-left:20%">
-          <form action="/" id="searchform">
-            <input type="text" placeholder="Search.." name="search">
-
-          </form>
-        </div>
-        &nbsp;&nbsp;
-        <div id="user" >
-          <a href="{%url 'profile' user.id%}" class="text">
-            <p >Welcome {{user}}</p>
-          </a>
-  
-          <img src="" alt="">
-        </div>
-      </div>
-    </div>
-  </nav>
+{%include 'all/navbar.html'%}
 <div class="contain" id="container-profile">
     <div class="row py-4 px-2">
         <div class="col-md-12 mx-auto"> 
@@ -44,34 +12,36 @@
                                 <img src="{{user.profile.profile_pic.url}}" alt="..." 
                              class="img-thumbnail" id="profile_pic">
                             </div>
-                            <div class="col-md-3" style="margin-left:5%" >
+                            <div class="col-md-4" style="margin-left:0%" >
                                 <div class="media-body mb-7 text-white"> 
-                                    <h4 class="mt-2 mb-0 ">{{user}}  <a class="btn btn-outline-light btn-sm btn-block" id="edit-profile" data-bs-toggle="modal" data-bs-target=".bd-example-modal-md"><strong>Edit Profile</strong></a>
+                                    <h4 class="mt-2 mb-0 "> <i class="fas fa-user"></i>&nbsp;Name: {{user}} 
+                                      
                                     </h4> 
-                                   
+                    
                                     <p class="small mb-4">
-                                        <i class="fas fa-map-marker-alt mr-2"></i> &nbsp;{{ user.profile.location }}
-                                    
-                                    </p>
-                                    <p class="small mb-4">
-                                        <i class="fas fa-envelope">&nbsp;{{user.email}}</i>
+                                        <i class="fas fa-envelope">&nbsp;Email: {{user.email}}</i>
                                     </p>
                                   
-                                    <p class="font-italic mb-0">Bio: {{ user.profile.bio }}</p>
+                                    <p class="font-italic mb-0"> <i class="fas fa-book"></i>&nbsp;Bio: {{ user.profile.bio }}</p>
                                     <br>
               
-                        
-                                    <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm btn-block">Logout</a>
+                                    
                                 </div>
                             </div>
-                            <div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="col-md-2"  style="margin-left:2%">
+                                <a class="btn btn-outline-light btn-sm btn-block" 
+                                id="edit-profile" data-bs-toggle="modal" data-bs-target=".bd-example-modal-md">
+                                <strong>Edit Profile</strong></a>
+                                <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm btn-block">Logout</a>
+                            </div>
+                            <div class="modal fade bd-example-modal-md" id="usermodal"tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-md ">
-                                    <div class="modal-content">
-                                        <form action="" method="post" novalidate enctype="multipart/form-data" class="mr-4 mt-4 ml-4 mb-4">
+                                    <div class="modal-content" id="modal-content">
+                                        <form action="" method="post" novalidate enctype="multipart/form-data" id="userform" class="mr-1 mt-4 ml-4 mb-4">
                                             {% csrf_token%}
                                             
                                             {{ updateUserForm.as_p}}
-                                            <button type="submit" class="btn btn-primary btn-sm"> Update Profile</button>
+                                            <button type="submit" class="btn btn-primary btn-sm" id="updateprofile"> Update Profile</button>
                                         </form>
                                     </div>
                                 </div>
