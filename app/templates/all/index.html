@@ -5,6 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <main >
     {% include 'all/navbar.html' %}
+    
     <div id="main">
         <div class="container mt-5">
             <div class="row">
@@ -23,6 +24,57 @@
             
         </div>
     </div>
+    <section id="hood" class="mt-5">
+        <div class="container">
+            <h2 style="font-family: futura-pt;">Join any neighbourhood below
+            or <span id="create"> <a href="{%url 'newhood'%}">Create one</a>
+            
+            </h2>
+            <div class="row">
+                {%if neighbourhoods%}
+                {%for neighbourhood in neighbourhoods %}
+                    <div class="col-sm-4 mb-3">
+                        <div class="card" id="hoodcard">
+                            <div class="card-body">
+                                <img src="{{neighbourhood.image.url}}" alt="">
+                                <h5 class="card-title">{{neighbourhood.name}}</h5>
+                                <p class="card-text">{{neighbourhood.location}}</p>
+                                <p>Created on {{neighbourhood.date|date}} by {{neighbourhood.admin}}</p>
+
+                                {% if request.user.profile.neighbourhood == neighbourhood %}
+                                <a  href="{% url 'hood' user.profile.neighbourhood.id %}">
+                                    <button class="btn" id="hoodview">View more</button></a>
+                                <a href="{% url 'leave' neighbourhood.id %}">
+                                    <button class="btn" id="hoodleave"> Leave {{neighbourhood.name}} Neighborhood</button>
+                                </a>
+
+                
+                                {% elif not request.user.profile.neighbourhood %}
+                                <a  href="{% url 'join' neighbourhood.id %}" id="hoodjoin" class="btn ">Join {{neighbourhood.name}} Neighborhood</a>
+                                {% endif %}
+                                    
+                                     <!-- works the same just that the join btn on the other neighbourhoods won't disappear -->
+                                <!-- {%if request.user.profile.neighbourhood != neighbourhood%}
+                                <a  href="{% url 'join' neighbourhood.id %}" class="btn btn-success button-action">Join {{neighbourhood.name}} Neighborhood</a>
+                                {%else%}
+                                 <a  href="{% url 'hood' user.profile.neighbourhood.id %}">
+                                    <button class="btn btn-success button-action">Check my Neighbourhood</button></a>
+                                <a href="{% url 'leave' neighbourhood.id %}" class="btn btn-outline-danger button-action">Leave {{neighbourhood.name}} Neighborhood</a>
+                                {% endif %} -->
+
+
+
+                        
+                            
+                            </div>
+                        </div>
+                    
+                    </div>
+                {%endfor%}
+                {%endif%}
+        </div>
+        
+    </section>
     
 </main>
 
