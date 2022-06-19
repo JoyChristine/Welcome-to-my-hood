@@ -1,67 +1,116 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <!-- bootstrap -->
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- font awesome -->
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <title>Document</title>
 </head>
 <body>
-    {%include 'all/navbar.html'%}
     
-    <div class="row mt-3" style="width:100%">
-        <div class="col-sm-3 " >
-            <div class="card" id="hoodcard">
-                <div class="card-body">
-                    <img src="{{neighbourhood.image.url}}" alt="">
-                    <h5 class="card-title">{{neighbourhood.name}}</h5>
-                    <p class="card-text">{{neighbourhood.location}}</p>
-                    <p>Created on {{neighbourhood.date|date}} by {{neighbourhood.admin}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4" style="border-left:1px solid rgb(160, 155, 155);">
-            <a href="{%url 'newpost' neighbourhood.id%}">
-                <button id="addpost">Add Post</button>
-            </a>
-            {%for post in posts%}
-            <div class="card">
-                
-                <div class="card-body">
-                    <img src="{{post.image.url}}" alt="" width=50 height=50>
-                    <h1>{{post.title}}</h1>
-                    <p>{{post.context}}</p>
-                
-                </div>
-                
-            </div>
-            {%endfor%}
-        </div>
-        <div class="col-sm-4"style="border-left: 1px solid rgb(160, 155, 155);" >
-            <a href="{%url 'newbusiness' neighbourhood.id%}">
-                <button id="addbusiness">Add business</button>
-            </a>
-            {%for bus in business%}
-            
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{bus.image.url}}" alt="" width=50 height=50>
-                    <h1>{{bus.name}}</h1>
-                    <p>{{bus.description}}</p>
-                    <p>{{bus.email}}</p>
-                
-                    
-                    <!-- <img src="{{neighbourhood.image.url}}" alt="">
-                    <h5 class="card-title">{{neighbourhood.name}}</h5>
-                    <p class="card-text">{{neighbourhood.location}}</p>
-                    <p>Created on {{neighbourhood.date|date}} by {{neighbourhood.admin}}</p> -->
-                </div>
-            </div>
-            {%endfor%}
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{%url 'index'%}">Neighbourhood Watch </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav"  >
+            <ul class="navbar-nav" style="margin-left:30%;">
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'index'%}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
     
-    </div>
-   
+            </ul>
+            <div class="search-container" style="margin-left:20%">
+              <form action="{% url 'search' %}" method="POST" id="searchform">
+                  {%csrf_token%}
+                <input type="text" name="searched" placeholder="Search Business" name="search">
+    
+              </form>
+            </div>
+            &nbsp;&nbsp;
+            <div id="user" >
+              <a href="{%url 'profile' user.id%}" class="text">
+                <p >Welcome {{user}}</p>
+              </a>
+      
+              <img src="" alt="">
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="container" id="hood-contain" style="max-width:100%;">
+        <h2 class="card-title text-center">{{neighbourhood.name}} Neighbourhood</h5>
+        <div class="row" style="width:100%">
+          <div class="col-sm-3 mt-4" >
+              <div class="hood-dets" id="hood-dets">
+                <h5 class="card-title">{{neighbourhood.name}} Neighbourhood</h5>
+                <p class="card-text">Located in {{neighbourhood.location}}</p>
+                      <img src="{{neighbourhood.image.url}}" alt=""/>
+                     
+                      <p>Created on {{neighbourhood.date|date}} <br> Admin: {{neighbourhood.admin}}</p>
+                      <p>Police helpline:{{neighbourhood.police_dept}}</p>
+                      <p>Health healpline:{{neighbourhood.health_dept}}</p>
+                      <p>About: {{neighbourhood.description}}</p>
+                 
+              </div>
+          </div>
+         
+          <div class="col-sm-4 mt-4" style="border-left:1px solid rgb(160, 155, 155);margin-left:5%">
+              <a href="{%url 'newpost' neighbourhood.id%}">
+                  <button id="addpost">Add Post</button>
+              </a>
+              <br>
+              {%for post in posts%}
+              <br>
+              <div class="card" id="postcard">
+                  
+                  <div class="card-body">
+                      <img src="{{post.image.url}}" alt="" >
+                      <h6>Title:{{post.title}}</h6>
+                      <p>About: {{post.context}}</p>
+                      <p>Posted on {{post.date}}</p>
+                  
+                  </div>
+                  
+              </div>
+              {%endfor%}
+          </div>
+          <div class="col-sm-4 mt-4"style="border-left: 1px solid rgb(160, 155, 155);" >
+              <a href="{%url 'newbusiness' neighbourhood.id%}">
+                  <button id="addbusiness">Add business</button>
+              </a>
+              <br>
+              {%for bus in business%}
+              <br>
+              <div class="card" id="buscard">
+                  <div class="card-body">
+                      <img src="{{bus.image.url}}" alt="" >
+                      <h6>Business Name:{{bus.name}}</h6>
+                      <p>About:{{bus.description}}</p>
+                      <p>Email: {{bus.email}}</p>
+                      
+                      <!-- <img src="{{neighbourhood.image.url}}" alt="">
+                      <h5 class="card-title">{{neighbourhood.name}}</h5>
+                      <p class="card-text">{{neighbourhood.location}}</p>
+                      <p>Created on {{neighbourhood.date|date}} by {{neighbourhood.admin}}</p> -->
+                  </div>
+              </div>
+              {%endfor%}
+          </div>
+      
+      </div>
+      </div>
 
 
 
