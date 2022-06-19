@@ -16,7 +16,7 @@ class UpdateUserForm(forms.ModelForm):
 class CreateNeighbourhoodForm(forms.ModelForm):
     class Meta:
         model = Neighbourhood
-        fields = ['image','name','location','health_dept','police_dept']
+        fields = ['image','name','location','about','health_dept','police_dept']
 
 class CreatePostForm(ModelForm):
     class Meta:
@@ -27,3 +27,8 @@ class AddBusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ['image','name','description','email']
+
+class UpdatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['image','title','context']
