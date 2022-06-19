@@ -39,7 +39,7 @@ class Neighbourhood(models.Model):
     occupants = models.IntegerField(null = True,verbose_name='Occupants')
     date = models.DateField(auto_now_add=True)
     def __str__(self):
-        return self.name
+        return self.id
 
   
 
@@ -66,6 +66,7 @@ class Neighbourhood(models.Model):
     
 
 class Business(models.Model):
+    image = CloudinaryField('image',blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     neighbourhood = models.ForeignKey('Neighbourhood',on_delete=models.CASCADE,blank=True)
     title = models.CharField(max_length=20)
@@ -100,9 +101,10 @@ class Business(models.Model):
 # update_business()
 
 class Post(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,blank=True)
-    title = models.CharField(max_length=20)
-    context = models.TextField()
+    image = CloudinaryField('image',null=True,blank=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
+    title = models.CharField(max_length=20,null = True)
+    context = models.TextField(null = True)
     date = models.DateField(auto_now_add=True)
     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE,blank=True)
     
