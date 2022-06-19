@@ -17,16 +17,13 @@
           </li>
 
         </ul>
-        <div class="search-container" style="margin-left:20%">
-          <form action="/" id="searchform">
-            <input type="text" placeholder="Search.." name="search">
-
-          </form>
-        </div>
+       
         &nbsp;&nbsp;
-        <div id="user" >
+        <div id="user" style="margin-left:40%">
           <a href="{%url 'profile' user.id%}" class="text">
             <p >Welcome {{user}}</p>
+            <img src="{{user.profile.profile_pic.url}}" alt="..." 
+                             class="img-thumbnail" width="">
           </a>
   
           <img src="" alt="">
