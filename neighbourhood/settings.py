@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-utwgi@bx(=_v(e+ia-4f9*=*i(k)0wvr&81)8+jd*cbt0oni(0'
+SECRET_KEY = config('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,9 +84,9 @@ WSGI_APPLICATION = 'neighbourhood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hood',
-        'USER':'joy',
-        'PASSWORD':'salt'
+        'NAME': config('DB_NAME'), 
+        'USER':config('CD_USER'), 
+        'PASSWORD':config('CD_PASSWORD'), 
     }
 }
 
