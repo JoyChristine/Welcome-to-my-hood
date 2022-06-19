@@ -6,8 +6,10 @@ from .forms import SignupForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Profile,Business,Neighbourhood,Post
-from .forms import UpdateUserForm, AddBusinessForm,CreateNeighbourhoodForm,CreatePostForm,AddBusinessForm
+from .forms import UpdateUserForm, AddBusinessForm,UpdatePostForm,CreateNeighbourhoodForm,CreatePostForm,AddBusinessForm
 from django.contrib.auth import authenticate,login,logout
+from django.views.generic import UpdateView, DeleteView
+
 #  Create your views here.
 def register(request):
     form = SignupForm()
@@ -122,20 +124,6 @@ def leave_neighbourhood(request,neighbourhood_id):
 
     return redirect('index')
 
-# def newpost(request, neighbourhood_id):
-#     neighbourhood = Neighbourhood.objects.get(id=neighbourhood_id)
-#     if request.method == 'POST':
-#         add_post_form = CreatePostForm(request.POST,request.FILES)
-#         if add_post_form.is_valid():
-#             post = add_post_form.save(commit=False)
-#             post.neighbourhood = neighbourhood
-#             post.user = request.user
-#             post.save()
-#             return redirect('hood', neighbourhood.id)
-#     else:
-#         add_post_form = CreatePostForm()
-#     return render(request, 'all/post.html', {'add_post_form': add_post_form,'neighbourhood':neighbourhood})
-
 def newpost(request,neighbourhood_id):
     neighbourhood = Neighbourhood.objects.get(id=neighbourhood_id)
     posts = Post.objects.all()
@@ -184,6 +172,80 @@ def newbusiness(request,neighbourhood_id):
         
     }
     return render(request, 'all/business.html', context)
+
+def searchbusiness(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        results = Business.objects.filter(name__icontains=searched)
+        context = {
+            'searched': searched,
+            'results':results
+        }
+        return render(request, 'all/results.html',context)
+    else:
+        return render(request, 'all/results.html')
+
+
+# def searchbusiness(request):
+#     if 'title' in request.POST and request.GET['title']:
+#         search_term = request.GET.get('title')
+#         searchbusiness = Business.searchbusiness(search_term)
+        
+#         context ={
+#             'searchbusiness':searchbusiness,
+#         }
+#         return render(request, 'all/results.html',context)
+#     else:
+#         return render(request, 'all/results.html')
+
+
+    # searchbusiness
+# class updatePost(UpdateView):
+#     model = Post
+#     template = 'all/post.html'
+#     form_class = UpdatePostForm
+
+
+# def updatepost(request,post_id):
+#     # profile = Profile.objects.get(user = neighbourhood_id)
+#     post = Post.objects.get(pk=post_id)
+#     if request.method=='POST':
+#         updatePostForm = UpdatePostForm(request.POST,request.FILES,instance=post)
+
+#         if updatePostForm.is_valid():
+#             updatePostForm.save()
+
+#         return redirect('hood')
+
+#     else:
+#         updatePostForm = UpdatePostForm(instance = post)
+
+#     context = {
+#         'updatePostForm': updatePostForm,
+#         'post':post,
+       
+#     }
+
+#     return render(request, 'all/hood.html', context)
+
+
+# def delete_post(request, id=None):
+
+#     post= get_object_or_404(Post, id=id)
+
+#     creator= post.user.id
+
+#     if request.method == "POST" and request.user.is_authenticated and request.user.id == creator:
+#         post.delete()
+#         messages.success(request, "Post successfully deleted!")
+#         return HttpResponseRedirect("/Blog/list/")
+    
+#     context= {
+#         'post': post,
+#         'creator': creator,
+#               }
+    
+#     return render(request, 'all/hood.html', context)
 
     # create,update,delete,update neighbourhood
     # get neighbourhood user
