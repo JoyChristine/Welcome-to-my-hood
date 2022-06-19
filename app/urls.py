@@ -23,7 +23,8 @@ urlpatterns = [
     path('neighbourhood/<neighbourhood_id>',views.viewneighbourhood,name='hood'),
     path('join/<neighbourhood_id>',views.join_neighbourhood,name='join'),
     path('leave/<neighbourhood_id>',views.leave_neighbourhood,name='leave'),
-    path('newpost/<int:neighbourhood_id>',views.newpost,name='newpost'),
+    path('newpost/<neighbourhood_id>',views.newpost,name='newpost'),
     path('newbusiness/<int:neighbourhood_id>',views.newbusiness,name='newbusiness'),
-
+    # path('delete/<id>',views.delete_post,name='delete'),
+    path('search/',views.searchbusiness,name='search'),
 ]
