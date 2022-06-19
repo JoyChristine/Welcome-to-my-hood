@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Pacifico&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -17,9 +17,10 @@ input {
     width: 100%;
    
     background-color: #5A445F;
-    min-height: 100vh;
+    max-height: 80vh;
     overflow: hidden;
 }
+
 .navbar{
     background-color: #5A445F;
     padding:2vw 2vw 2vw 2vw;
@@ -57,10 +58,24 @@ input {
 #user p:hover{
 
 }
+/* MYprofile */
+#container-profile{
+    position: relative;
+    width: 100%;
+    font-family: 'Cabin', sans-serif;
+    font-size:1.5vw;
+    background-color: #5A445F;
+    min-height: 100vh;
+    overflow: hidden;
+}
+#edit-profile{
+    background-color: #FFC265;
+    color:black;
+    padding:1vw 1vw 1vw 1vw;
+    border:none;
+}
 
-
-
-
+/* END OF MYPROFILE */
 
 
 
@@ -77,3 +92,57 @@ input {
     font-family: 'Cabin', sans-serif;
     padding-left: 2vw;
 }
+/* hood */
+#create a{
+    text-decoration: none;
+    color:#5A445F
+}
+#create a:hover{
+    text-decoration: underline;
+}
+#hoodcard{
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255, 0.2);
+    /* box-shadow: 0 35px 68px 0 rgba(170,63,254,0.1), inset 0 -8px 16px 0  #D6A2FF; */
+    padding: 1vw; 
+    margin-left: 1%;
+
+    border-radius: 30px;
+    background: #ffffff;
+    text-align: center;
+}
+#hoodcard img{
+    width: 15vw;
+    height: 15vw;
+}
+#hoodjoin{
+    background-color: #5A445F;
+    color:rgb(255, 255, 255);
+    padding:1vw 1vw 1vw 1vw;
+    border:none;
+}
+#hoodview{
+    background-color: #5A445F;
+    color:rgb(255, 255, 255);
+    padding:1vw 1vw 1vw 1vw;
+    border:none;
+}
+#hoodleave{
+    background-color: #FFC265;
+    color:rgb(0, 0, 0);
+    padding:1vw 1vw 1vw 1vw;
+    border:none;
+}
+/* ***************END HOOD */
+
+/* add neighbourhood */
+#addhoodbtn{
+    background-color: #FFC265;
+    color:black;
+    padding:.8vw .8vw .8vw .8vw;
+    border:none;
+}
+#addhood{
+    background-color: #5A445F;
+}
+/* ***********end neighbourhood */
