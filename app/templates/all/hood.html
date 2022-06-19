@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%include 'all/navbar.html'%}
+    
+    <div class="row mt-3" style="width:100%">
+        <div class="col-sm-3 " >
+            <div class="card" id="hoodcard">
+                <div class="card-body">
+                    <img src="{{neighbourhood.image.url}}" alt="">
+                    <h5 class="card-title">{{neighbourhood.name}}</h5>
+                    <p class="card-text">{{neighbourhood.location}}</p>
+                    <p>Created on {{neighbourhood.date|date}} by {{neighbourhood.admin}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" style="border-left:1px solid rgb(160, 155, 155);">
+            <a href="{%url 'newpost' neighbourhood.id%}">
+                <button id="addpost">Add Post</button>
+            </a>
+            {%for post in posts%}
+            <div class="card">
+                
+                <div class="card-body">
+                    <img src="{{post.image.url}}" alt="" width=50 height=50>
+                    <h1>{{post.title}}</h1>
+                    <p>{{post.context}}</p>
+                
+                </div>
+                
+            </div>
+            {%endfor%}
+        </div>
+        <div class="col-sm-4"style="border-left: 1px solid rgb(160, 155, 155);" >
+            <a href="{%url 'newbusiness' neighbourhood.id%}">
+                <button id="addbusiness">Add business</button>
+            </a>
+            {%for bus in business%}
+            
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{bus.image.url}}" alt="" width=50 height=50>
+                    <h1>{{bus.name}}</h1>
+                    <p>{{bus.description}}</p>
+                    <p>{{bus.email}}</p>
+                
+                    
+                    <!-- <img src="{{neighbourhood.image.url}}" alt="">
+                    <h5 class="card-title">{{neighbourhood.name}}</h5>
+                    <p class="card-text">{{neighbourhood.location}}</p>
+                    <p>Created on {{neighbourhood.date|date}} by {{neighbourhood.admin}}</p> -->
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    
+    </div>
+   
+
+
+
+</body>
+</html>
