@@ -1,0 +1,59 @@
+{%extends 'all/base.html'%}
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    {%block content %}
+    {%include 'all/navbar.html'%}
+    <div class="addhood" id="addhood">
+        <div class="container">
+            <div class="row">
+    
+                <div class="col-md-8 mx-auto card p-5">
+                    <div class="panel panel-default">
+    
+                        <div class="panel-heading">
+                            <h3 class="text-center">Add Business</h3>
+                        </div>
+                        <div class="panel-body">
+    
+                            <form action="{%url 'newbusiness' neighbourhood.id%}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{businessform.as_p}}
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-sm" id="addhoodbtn"value="Add Business">
+                                </div>
+                                <input type="hidden" name="next" value="{{next}}">
+    
+                            </form>
+    
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='Name..';
+		form_fields[2].placeholder='Description ...';
+		// form_fields[3].placeholder='Name...';
+		
+
+
+		for (var field in form_fields){	
+			form_fields[field].className += ' form-control'
+		}
+   </script>
+   {%endblock %}
+</body>
+</html>
