@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'phone_field'
+    
+
     
 ]
 
@@ -80,9 +83,9 @@ WSGI_APPLICATION = 'neighbourhood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighbour',
+        'NAME': 'hood',
         'USER':'joy',
-        'PASSWORD':'neigh'
+        'PASSWORD':'salt'
     }
 }
 
