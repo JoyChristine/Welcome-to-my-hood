@@ -24,6 +24,27 @@ class Profile(models.Model):
         if created:
             Profile.objects.create(user=instance)
 
+    @receiver(post_save,sender=User)
+    def save_user_profile(sender,instance,**kwargs):
+            instance.profile.save()
+
+
+    def save_profile(self):
+        self.user
+
+    def delete_profile(self):
+        self.delete()
+    
+    @classmethod
+    def search_by_name(cls, search_term):
+        user = cls.object.filter(profile__icontains=search_term)
+        return user
+
+    @classmethod
+    def get_all_profiles(cls):
+        user=cls.object.all()
+        return user
+
     # @receiver(post_save,sender=User)
     # def save_user_profile(sender,instance,**kwargs):
     #         instance.profile.save()
@@ -31,21 +52,27 @@ class Profile(models.Model):
 
 class Neighbourhood(models.Model):
     image = CloudinaryField('image',blank=True, default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20,null=True)
     location = models.CharField(max_length=20)
     admin = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,related_name='admin')
     health_dept = PhoneField(unique=True,blank=True,max_length=20,help_text='Phone Number Format: +254712345678')
     police_dept = PhoneField(unique=True,blank=True,max_length=20,help_text='Phone Number Format: +254712345678')
     occupants = models.IntegerField(null = True,verbose_name='Occupants')
     date = models.DateField(auto_now_add=True)
+    about = models.TextField(blank=True)
+
+
     def __str__(self):
-        return self.id
+        return f'{self.name} Neighbourhood'
 
   
 
     def create_neighbourhood(self):
         self.save()
-        
+    
+    def save_neighbourhood(self):
+        self.name
+
     def delete_neighbourhood(self):
         self.delete()
 
@@ -83,10 +110,17 @@ class Business(models.Model):
 
     def delete_business(self):
         self.delete()
-    
+
+    # def save_business(self):
+    #     self.user
+
     @classmethod
     def get_all_business(cls):
         return cls.objects.all()
+
+    @classmethod
+    def searchbusiness(cls,business):
+        return cls.objects.filter(title__icontains=business).all()
 
     @classmethod
     def find_business(cls,name):
@@ -117,3 +151,6 @@ class Post(models.Model):
 
     def delete_post(self):
         self.delete()
+
+    def save_post(self):
+        self.user
