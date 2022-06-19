@@ -5,7 +5,8 @@ from django.db.models.signals import post_save
 from cloudinary.models import CloudinaryField
 from django.db.models.deletion import CASCADE, SET_NULL
 from django.http import Http404
-from phonenumber_field.modelfields import PhoneNumberField
+
+from phone_field import PhoneField
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
@@ -14,12 +15,6 @@ class Profile(models.Model):
     email =models.EmailField(max_length=20)
     location = models.CharField(max_length=20,null=True, blank=True)
     neighbourhood = models.ForeignKey('NeighbourHood', on_delete=SET_NULL,null=True, related_name='pple', blank=True)
-    # user = models.OneToOneField(User,on_delete=models.CASCADE)
-    # bio = models.CharField(max_length=50)
-    # profile_pic = CloudinaryField('image',default='https://res.cloudinary.com/dz275mqsc/image/upload/v1654858776/default_nbsolf.png')
-    # neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE,blank=True)
-    # email= models.EmailField(max_length=20)
-    # location= models.CharField(max_length=20,blank=True)
 
     def __str__(self):
         return self.user.username
@@ -39,10 +34,10 @@ class Neighbourhood(models.Model):
     name = models.CharField(max_length=20)
     location = models.CharField(max_length=20)
     admin = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,related_name='admin')
-    health_dept = PhoneNumberField(unique=True,blank=True,max_length=20,help_text='Phone Number Format: +254712345678')
-    police_dept = PhoneNumberField(unique=True,blank=True,max_length=20,help_text='Phone Number Format: +254712345678')
+    health_dept = PhoneField(unique=True,blank=True,max_length=20,help_text='Phone Number Format: +254712345678')
+    police_dept = PhoneField(unique=True,blank=True,max_length=20,help_text='Phone Number Format: +254712345678')
     occupants = models.IntegerField(null = True,verbose_name='Occupants')
-
+    date = models.DateField(auto_now_add=True)
     def __str__(self):
         return self.name
 
