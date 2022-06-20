@@ -38,13 +38,13 @@
               </form>
             </div>
             &nbsp;&nbsp;
-            <div id="user" >
+            <!-- <div id="user" >
               <a href="{%url 'profile' user.id%}" class="text">
                 <p >Welcome {{user}}</p>
               </a>
       
               <img src="" alt="">
-            </div>
+            </div> -->
           </div>
         </div>
       </nav>
@@ -62,6 +62,10 @@
                       <p>Police helpline:{{neighbourhood.police_dept}}</p>
                       <p>Health healpline:{{neighbourhood.health_dept}}</p>
                       <p>About: {{neighbourhood.description}}</p>
+                      <h6>Members:</h6>
+                      {%for u in users%}
+                      <ul><li>{{u.user}}</li></ul>
+                      {%endfor%}
                  
               </div>
           </div>
