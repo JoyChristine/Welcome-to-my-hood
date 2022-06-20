@@ -101,7 +101,7 @@ def viewneighbourhood(request,neighbourhood_id):
     business=Business.objects.filter(neighbourhood=neighbourhood)
     users= Profile.objects.filter(neighbourhood=neighbourhood)
     posts = Post.objects.filter(neighbourhood=neighbourhood)
-    
+
     context ={
         'current_user': current_user,
         'neighbourhood':neighbourhood,
@@ -186,20 +186,6 @@ def searchbusiness(request):
         return render(request, 'all/results.html')
 
 
-# def searchbusiness(request):
-#     if 'title' in request.POST and request.GET['title']:
-#         search_term = request.GET.get('title')
-#         searchbusiness = Business.searchbusiness(search_term)
-        
-#         context ={
-#             'searchbusiness':searchbusiness,
-#         }
-#         return render(request, 'all/results.html',context)
-#     else:
-#         return render(request, 'all/results.html')
-
-
-    # searchbusiness
 # class updatePost(UpdateView):
 #     model = Post
 #     template = 'all/post.html'
