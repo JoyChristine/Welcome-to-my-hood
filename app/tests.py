@@ -50,12 +50,18 @@ class BusinessTestClass(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.business,Business))
-
-    # def test_save_business(self):
-    #     self.user.save()
        
     def test_delete_business(self):
         self.user.delete()
+
+    def test_save_business(self):
+        self.user.save()
+
+    def test_update_method(self):
+        self.user.save()
+
+    def test_search_business(self):
+        self.user.save()
 
 class PostTestClass(TestCase):
     def setUp(self):
@@ -75,3 +81,4 @@ class PostTestClass(TestCase):
        
     def test_delete_post(self):
         self.user.delete()
+
