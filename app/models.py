@@ -111,8 +111,8 @@ class Business(models.Model):
     def delete_business(self):
         self.delete()
 
-    # def save_business(self):
-    #     self.user
+    def save_business(self):
+        self.user
 
     @classmethod
     def get_all_business(cls):
@@ -123,16 +123,15 @@ class Business(models.Model):
         return cls.objects.filter(title__icontains=business).all()
 
     @classmethod
+    def update_business(cls,business):
+        return cls.objects.filter(business=business).update(business=business)
+
+    @classmethod
     def find_business(cls,name):
         try:
             return cls.objects.get(pk=name)
         except Business.DoesNotExist:
             return Http404
-        # return cls.objects.filter(name__icontains=name).all()
-# create_business()
-# delete_business()
-# find_business(business_id)
-# update_business()
 
 class Post(models.Model):
     image = CloudinaryField('image',null=True,blank=True)
