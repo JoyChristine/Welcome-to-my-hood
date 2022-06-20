@@ -21,7 +21,8 @@ https://github.com/JoyChristine/Welcome-to-my-hood.git
 ```
 #### Navigate into the folder and install requirements  
  ```bash 
-cd Picture-Globe pip install -r requirements.txt 
+cd Welcome-to-my-hood 
+pip install -r requirements.txt 
 ```
 ##### Install and activate Virtual  
  ```bash 
