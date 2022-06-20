@@ -10,9 +10,9 @@ Welcome to my hood is a project where a user can join only 1 neighbourhood at a 
 * Logout
 
 
-### Prerequisites
+## Prerequisites
 
-# Setup and Installation  
+## Setup and Installation  
 
   
 #### Cloning the repository:  
