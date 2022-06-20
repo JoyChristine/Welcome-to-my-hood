@@ -88,10 +88,10 @@ input {
 }
 #container-profile img{
     width:25vw;
-    height:40vh;
+    height:50vh;
 }
 #edit-profile{
-    background-color: #FFC265;
+    background-color: #EEA5AE;
     color:black;
     padding:1vw 1vw 1vw 1vw;
     border:none;
@@ -188,7 +188,7 @@ input {
 }
 #hood-contain{
     background-color: #5A445F;
-    
+    max-width: 100%;
     color: #fff;
     /* border-top: 1px solid white; */
 }
