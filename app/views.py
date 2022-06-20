@@ -50,7 +50,7 @@ def index(request):
 
 def updateprofile(request,id):
     profile = Profile.objects.get(user = id)
-    business = Business.objects.all()
+    # business = Business.objects.all()
     if request.method=='POST':
         updateUserForm = UpdateUserForm(request.POST,request.FILES,instance=request.user.profile)
 
@@ -65,7 +65,7 @@ def updateprofile(request,id):
     context = {
         'updateUserForm': updateUserForm,
         'profile':profile,
-        'business':business,
+        # 'business':business,
        
     }
 
@@ -101,7 +101,7 @@ def viewneighbourhood(request,neighbourhood_id):
     business=Business.objects.filter(neighbourhood=neighbourhood)
     users= Profile.objects.filter(neighbourhood=neighbourhood)
     posts = Post.objects.filter(neighbourhood=neighbourhood)
-
+    
     context ={
         'current_user': current_user,
         'neighbourhood':neighbourhood,
