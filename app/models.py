@@ -112,7 +112,7 @@ class Business(models.Model):
         self.delete()
 
     def save_business(self):
-        self.user
+        self.save()
 
     @classmethod
     def get_all_business(cls):
