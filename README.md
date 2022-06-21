@@ -9,7 +9,8 @@ Welcome to my hood is a project where a user can join only 1 neighbourhood at a 
 * Search for a business
 * Logout
 
-
+### Live link
+https://welcometomyhood.herokuapp.com/
 ## Prerequisites
 
 ## Setup and Installation  
