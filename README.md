@@ -27,10 +27,15 @@ https://github.com/JoyChristine/Welcome-to-my-hood.git
 cd Welcome-to-my-hood 
 pip install -r requirements.txt 
 ```
-##### Install and activate Virtual  
+##### Install Virtual environment
  ```bash 
-- python3 -m venv virtual - source virtual/bin/activate  
+ python3 -m venv virtual
 ```  
+##### activate Virtual  environment 
+ ```bash 
+source virtual/bin/activate  
+```  
+
 ##### Install Dependencies  
  ```bash 
  pip install -r requirements.txt 
